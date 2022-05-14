@@ -1,6 +1,11 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# frozen_string_literal: true
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  root to: 'posts#index'
+
+  devise_for :users
+
+  resources :posts
+
+  resources :comments, only: %i[create update edit new]
 end
