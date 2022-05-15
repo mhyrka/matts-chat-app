@@ -5,4 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+User.create([
+              { email: 'hello@world.com',
+                username: 'fooBar',
+                password: 'password1',
+                password_confirmation: 'password1' },
+              { email: 'hello+1@world.com', username: 'fooBarOne', password: 'password1',
+                password_confirmation: 'password1' }
+            ])
 Post.create([{ title: 'Hello World', content: 'Foo Bar' }, { title: 'This is the end', content: 'beautiful friend' }])
