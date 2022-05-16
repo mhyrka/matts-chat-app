@@ -12,7 +12,8 @@ class Post < ApplicationRecord
 
   validates_length_of :title, maximum: 120
 
-  #   default_scope { where deleted: false }
+  default_scope { where deleted: false }
+
   scope :homepage, (
     lambda do |page_num|
       includes(:comments)

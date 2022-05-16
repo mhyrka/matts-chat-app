@@ -9,13 +9,13 @@ class PostsController < ApplicationController
     @posts = Post.homepage(params[:page])
   end
 
-  # GET /posts/1
-  def show
-    @comments = @post.comments.includes(:user).order(created_at: :asc)
-  end
-
   def new
     @post = Post.new
+  end
+
+  # GET /posts/:id
+  def show
+    @comments = @post.comments.includes(:user).order(created_at: :asc)
   end
 
   def create
@@ -32,7 +32,35 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html do
+          redirect_to @post, notice: 'Post was created.'
+        end
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    respond_to do |format|
+      if @post.update(deleted: true)
+        format.html do
+          redirect_to posts_url, notice: 'Post was successfully removed.'
+        end
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
+
+  def authorize_poster!
+    raise Exceptions::User::Unauthorized unless @post.user == current_user
+  end
 
   def post_params
     params.require(:post).permit(:title, :content)

@@ -6,8 +6,13 @@ class CommentsController < ApplicationController
 
   before_action :authorize_poster!, only: %i[edit update]
 
+  def new
+    @comment = Comment.new
+    @post_id = params[:post_id]
+  end
+
   def create
-    @comment = Comment.new(create_params)
+    @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -18,5 +23,14 @@ class CommentsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def comment_params
+    params
+      .require(:comment)
+      .permit(:post_id, :content)
+      .merge(user: current_user)
   end
 end

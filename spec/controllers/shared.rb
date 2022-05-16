@@ -1,4 +1,4 @@
-RSpec.shared 'requires authentication' do
+RSpec.shared_examples 'requires authentication' do
   it 'raises for unauthenticated users' do
     make_request
 
@@ -6,7 +6,7 @@ RSpec.shared 'requires authentication' do
   end
 end
 
-RSpec.shared 'requires authorization' do
+RSpec.shared_examples 'requires authorization' do
   before { sign_in(app_user) }
 
   it 'returns a 401' do
