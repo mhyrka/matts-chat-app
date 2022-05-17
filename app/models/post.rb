@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# OP
+# Post model
 class Post < ApplicationRecord
   belongs_to :user
 

@@ -13,7 +13,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  # GET /posts/:id
   def show
     @comments = @post.comments.includes(:user).order(created_at: :asc)
   end

@@ -27,10 +27,18 @@ class CommentsController < ApplicationController
 
   private
 
+  def authorize_poster!
+    raise Exceptions::User::Unauthorized unless @comment.user == current_user
+  end
+
   def comment_params
     params
       .require(:comment)
       .permit(:post_id, :content)
       .merge(user: current_user)
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end
