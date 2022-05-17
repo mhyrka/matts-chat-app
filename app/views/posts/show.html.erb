@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row">
-  <div class="col">
-    <strong>
-      <h2>
-        <%= @post.title %>
-      </h2>
-    </strong>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-2">
-    <%= @post.user.username %>
+<div class="post-card">
+  <div class="row">
+    <div>
+      <strong>
+        <h2>
+          <%= @post.title %>
+        </h2>
+        <div class="col-2">
+          <em><%= @post.user.username %></em>
+        </div>
+      </strong>
+    </div>
   </div>
 
   <div class="col">
